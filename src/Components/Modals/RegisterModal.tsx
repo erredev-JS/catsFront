@@ -5,11 +5,8 @@ import { closeModalRegister } from "../../redux/features/modal/modalSlice";
 
 export const RegisterModal = () => {
   const isOpen = useSelector((state: RootState) => state.modal.registerIsOpen);
-  const dispatch = useDispatch<AppDispatch>();
 
-  if (!isOpen) {
-    return null;
-  }
+  const dispatch = useDispatch<AppDispatch>();
 
   const [formData, setFormData] = useState({
     email: "",
@@ -17,10 +14,15 @@ export const RegisterModal = () => {
     password: "",
   });
 
+  if (!isOpen) {
+    return null;
+  }
+
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log(formData);
   };
+
   const handleCloseModal = () => {
     dispatch(closeModalRegister());
   };
@@ -29,7 +31,9 @@ export const RegisterModal = () => {
     <div className="border h-[40vh] w-8/10 fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-2xl bg-slate-700 max-w-[530px]">
       <div className="flex w-full justify-between px-5 pt-5 items-center">
         <p className="opacity-0"></p>
-        <button className="bg-red-600 w-[33px] h-[33px] rounded text-2xl text-black font-black cursor-pointer hover:bg-red-700" onClick={handleCloseModal}>X</button>
+        <button className="bg-red-600 w-[33px] h-[33px] rounded text-2xl text-black font-black cursor-pointer hover:bg-red-700" onClick={handleCloseModal}>
+          X
+        </button>
       </div>
 
       <form action="" className="flex flex-col w-1/2 m-auto gap-6" onSubmit={handleSubmit}>
