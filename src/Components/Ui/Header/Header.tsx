@@ -1,16 +1,21 @@
-import { useDispatch } from "react-redux";
-import { AppDispatch } from "../../../redux/store";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../../../redux/store";
 import { openModalLogin } from "../../../redux/features/modal/modalSlice";
+import { setNotLoggedIn } from "../../../redux/features/auth/authSlice";
 
 export const Header = () => {
 
+  const isLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
     const dispatch = useDispatch<AppDispatch>()
 
   return (
     <header className="h-[8vh] bg-slate-700 flex items-center px-2 justify-between">
       <h1 className="text-white text-2xl font-black">Cattlify</h1>
+      {
+        isLoggedIn ? <h1>Logeado</h1> : <button className="bg-white px-2 py-1 rounded cursor-pointer" onClick={() => dispatch(openModalLogin())}>Login</button>
 
-      <button className="bg-white px-2 py-1 rounded cursor-pointer" onClick={() => dispatch(openModalLogin())}>Login</button>
+      }
+      {isLoggedIn ?  <button className="bg-white px-2 py-1 rounded cursor-pointer" onClick={() => dispatch(setNotLoggedIn())}>Cerrar sesión</button> : null}
     </header>
   );
 };

@@ -2,6 +2,8 @@ import { FormEvent, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../redux/store";
 import { closeModalLogin, openModalRegister } from "../../redux/features/modal/modalSlice";
+import { login } from "../../http/crudAuth";
+import { setLoggedIn } from "../../redux/features/auth/authSlice";
 
 export const LoginModal = () => {
   const isOpen = useSelector((state: RootState) => state.modal.loginIsOpen);
@@ -17,9 +19,18 @@ export const LoginModal = () => {
     return null;
   }
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(formData);
+    try {
+      
+      const response = await login(formData.email, formData.password)
+      localStorage.setItem('token', response.access_token)
+      dispatch(setLoggedIn())
+      alert('Logeado correctamente')
+
+    } catch (error) {
+      alert('Error al logear')
+    }
   };
 
   const handleCloseModal = () => {
@@ -27,7 +38,7 @@ export const LoginModal = () => {
   };
 
   return (
-    <div className="border h-[40vh] w-8/10 fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-2xl bg-slate-700 max-w-[530px]">
+    <div className="border h-[50vh] w-8/10 fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-2xl bg-slate-700 max-w-[530px]">
       <div className="flex w-full justify-between px-5 pt-5 items-center">
         <p className="opacity-0"></p>
         <button className="bg-red-600 w-[33px] h-[33px] rounded text-2xl text-black font-black cursor-pointer hover:bg-red-700" onClick={handleCloseModal}>
