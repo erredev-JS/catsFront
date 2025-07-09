@@ -8,6 +8,6 @@ interface Props {
 
 export const ListCats: FC<Props> = ({ catsArray }) => {
   return <div className="mt-8">
-    {catsArray.map((cat) => <CardCat cat={cat}/>)}
+    {catsArray.map((cat) => <CardCat cat={cat} key={cat.id}/>)}
   </div>;
 };

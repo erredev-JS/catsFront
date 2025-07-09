@@ -7,3 +7,12 @@ export const getAllCats = async () => {
     const response = await axios.get(BASE_URL)
     return response.data
 }
+
+export const postCat = async (name: string, age: number,  breedId: number) => {
+    const response = await axios.post(BASE_URL, {
+        name: name,
+        age: age,
+        breedId: breedId
+    })
+    return response.data
+}
