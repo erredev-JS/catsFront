@@ -1,10 +1,13 @@
 import axios from "axios";
 
-const AxiosInterceptor = axios.create();
+import {  store } from "../redux/store";
+
+export const AxiosInterceptor = axios.create();
 
 AxiosInterceptor.interceptors.request.use(
   (config) => {
-    const JWTtoken = localStorage.getItem("token");
+    const state = store.getState()
+    const JWTtoken = state.auth.token;
     if (JWTtoken) {
       config.headers.Authorization = `Bearer ${JWTtoken}`;
     }

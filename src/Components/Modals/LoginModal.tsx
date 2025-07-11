@@ -4,6 +4,7 @@ import { AppDispatch, RootState } from "../../redux/store";
 import { closeModalLogin, openModalRegister } from "../../redux/features/modal/modalSlice";
 import { login } from "../../http/crudAuth";
 import { setLoggedIn } from "../../redux/features/auth/authSlice";
+import Swal from "sweetalert2";
 
 export const LoginModal = () => {
   const isOpen = useSelector((state: RootState) => state.modal.loginIsOpen);
@@ -24,10 +25,14 @@ export const LoginModal = () => {
     try {
       
       const response = await login(formData.email, formData.password)
-      localStorage.setItem('token', response.access_token)
-      dispatch(setLoggedIn())
-      alert('Logeado correctamente')
-
+      dispatch(setLoggedIn(response.access_token))
+      Swal.fire({
+              icon: "success",
+              title: "Sesion iniciada",
+              text: "Sesion iniciada exitosamente",
+           
+            });
+    dispatch(closeModalLogin())
     } catch (error) {
       alert('Error al logear')
     }

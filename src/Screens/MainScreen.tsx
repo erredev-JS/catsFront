@@ -3,14 +3,16 @@ import { Header } from "../Components/Ui/Header/Header";
 import { getAllCats } from "../http/crudCats";
 import { ICat } from "../types/ICat";
 import { ListCats } from "../Components/ListCats/ListCats";
-import { useSelector } from "react-redux";
-import { RootState } from "../redux/store";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../redux/store";
 import Swal from "sweetalert2";
+import { openModalAddCat } from "../redux/features/modal/modalSlice";
+import { setLoggedIn } from "../redux/features/auth/authSlice";
 
 export const MainScreen = () => {
   const [arrayCats, setArayCats] = useState<ICat[]>([]);
   const isLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
-
+  const dispatch = useDispatch<AppDispatch>()
   const getCats = async () => {
     const response = await getAllCats();
     setArayCats(response);
@@ -24,8 +26,17 @@ export const MainScreen = () => {
         text: "Primero debes iniciar sesión",
      
       });
+    }else{
+      dispatch(openModalAddCat())
     }
   };
+
+  // const isLoggedCheck = () => {
+  //   const response = localStorage.getItem('token')
+  //   if(response){
+  //     dispatch(setLoggedIn())
+  //   }
+  // }
 
   useEffect(() => {
     getCats();

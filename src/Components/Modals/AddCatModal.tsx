@@ -4,17 +4,22 @@ import { AppDispatch, RootState } from "../../redux/store";
 import { closeModalAddCat } from "../../redux/features/modal/modalSlice";
 import { getAllBreed } from "../../http/crudBreeds";
 import { IBreed } from "../../types/IBreed";
+import { postCat } from "../../http/crudCats";
 
 export const AddCatModal = () => {
     
-    const isOpen = useSelector((state: RootState) => state.modal.addCatIsOpen)
-    if(!isOpen){
-      return null
-    }
+    const isOpen = useSelector((state: RootState) => state.modal.addCatIsOpen)  
 
     const [breedsArray, setBreedsArray] = useState<IBreed[]>([])
-
-    const getAllBreeds = async () => {
+    
+    const [formData, setFormData] = useState({
+        name: "",
+        age: 0,
+        breedId: 0,
+      });
+      const dispatch = useDispatch<AppDispatch>();
+      
+      const getAllBreeds = async () => {
         const response = await getAllBreed()
         setBreedsArray(response)
     }
@@ -22,24 +27,23 @@ export const AddCatModal = () => {
     useEffect(() => {
         getAllBreeds()
     }, [])
+    
+    
+    
+      const handleCloseModal = () => {
+        dispatch(closeModalAddCat());
+      };
+    
+      const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
+        await postCat(formData.name, formData.age, formData.age)
+      }
+    
+      if(!isOpen){
+      return null
+    }
 
 
-      const dispatch = useDispatch<AppDispatch>();
-
-
-    const [formData, setFormData] = useState({
-        name: "",
-        age: 1,
-        breedId: "",
-      });
-
-  const handleCloseModal = () => {
-    dispatch(closeModalAddCat());
-  };
-
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-  }
 
 
 
@@ -66,11 +70,11 @@ export const AddCatModal = () => {
                 })
               }
             />
-           <select className="bg-white border rounded px-4 py-2">
+           <select className="bg-white border rounded px-4 py-2" onChange={(e) => formData.breedId = Number(e.target.value)}>
             <option>Selecciona una raza</option>
-                {breedsArray.map((breed) => <option value={breed.id}>{breed.name}</option>)}
+                {breedsArray.map((breed) => <option value={breed.id} key={breed.id}>{breed.name}</option>)}
            </select>
-            <button className="bg-white w-8/10 m-auto rounded font-bold cursor-pointer hover:bg-slate-400">Añadir gato</button>
+            <button className="bg-white w-8/10 m-auto rounded font-bold cursor-pointer hover:bg-slate-400" type="submit">Añadir gato</button>
           </form>
         </div>
   )

@@ -9,7 +9,7 @@ interface ModalState {
 const initialState: ModalState = {
   loginIsOpen: false,
   registerIsOpen: false,
-  addCatIsOpen: true,
+  addCatIsOpen: false,
 };
 
 const modalSlice = createSlice({

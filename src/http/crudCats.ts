@@ -1,4 +1,5 @@
 import axios from "axios"
+import { AxiosInterceptor } from "../interceptor/AxiosInterceptor"
 
 const BASE_URL = 'https://nest-postgres-api-rest-jwt-cats.onrender.com/cats'
 
@@ -9,7 +10,7 @@ export const getAllCats = async () => {
 }
 
 export const postCat = async (name: string, age: number,  breedId: number) => {
-    const response = await axios.post(BASE_URL, {
+    const response = await AxiosInterceptor.post(BASE_URL, {
         name: name,
         age: age,
         breedId: breedId
