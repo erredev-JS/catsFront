@@ -1,6 +1,7 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import modalReducer from "../redux/features/modal/modalSlice";
 import authReducer from "../redux/features/auth/authSlice";
+import catsReducer from "../redux/features/cats/catsSlice";
 
 import storage from "redux-persist/lib/storage";
 import { persistReducer, persistStore } from "redux-persist";
@@ -14,6 +15,7 @@ const persistConfig = {
 const rootReducer = combineReducers({
   modal: modalReducer,
   auth: authReducer,
+  cats: catsReducer
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

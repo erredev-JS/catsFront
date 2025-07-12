@@ -8,14 +8,17 @@ import { AppDispatch, RootState } from "../redux/store";
 import Swal from "sweetalert2";
 import { openModalAddCat } from "../redux/features/modal/modalSlice";
 import { setLoggedIn } from "../redux/features/auth/authSlice";
+import { setCats } from "../redux/features/cats/catsSlice";
 
 export const MainScreen = () => {
-  const [arrayCats, setArayCats] = useState<ICat[]>([]);
+
+  const catsArray = useSelector((state: RootState) => state.cats.catsArray)
+
   const isLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
   const dispatch = useDispatch<AppDispatch>()
   const getCats = async () => {
     const response = await getAllCats();
-    setArayCats(response);
+    dispatch(setCats(response));
   };
 
   const handleAddCatClick = async () => {
@@ -40,7 +43,7 @@ export const MainScreen = () => {
 
   useEffect(() => {
     getCats();
-  }, []);
+  }, [catsArray]);
 
   return (
     <div>
@@ -51,7 +54,7 @@ export const MainScreen = () => {
           Agregar gato
         </button>
       </div>
-      <ListCats catsArray={arrayCats} />
+      <ListCats catsArray={catsArray} />
     </div>
   );
 };

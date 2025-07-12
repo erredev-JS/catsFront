@@ -9,11 +9,16 @@ export const getAllCats = async () => {
     return response.data
 }
 
-export const postCat = async (name: string, age: number,  breedId: number) => {
+export const postCat = async (name: string, age: number, breedId: number) => {
+  try {
     const response = await AxiosInterceptor.post(BASE_URL, {
-        name: name,
-        age: age,
-        breedId: breedId
-    })
-    return response.data
-}
+      name,
+      age,
+      breedId,
+    });
+    return response.data;
+  } catch (error: any) {
+    console.error("Error al postear el gato:", error.response?.data || error.message);
+    throw error;
+  }
+};
