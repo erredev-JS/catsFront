@@ -2,12 +2,12 @@ import "./App.css";
 import { AddCatModal } from "./Components/Modals/AddCatModal";
 import { LoginModal } from "./Components/Modals/LoginModal";
 import { RegisterModal } from "./Components/Modals/RegisterModal";
-import { MainScreen } from "./Screens/MainScreen";
+import { AppRoutes } from "./Components/Routes/AppRoutes";
 
 function App() {
   return (
     <div>
-      <MainScreen />
+      <AppRoutes/>
       <LoginModal />
       <RegisterModal />
       <AddCatModal />

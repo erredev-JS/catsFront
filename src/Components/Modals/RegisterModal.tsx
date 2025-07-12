@@ -28,7 +28,9 @@ export const RegisterModal = () => {
   };
 
   return (
-    <div className="border h-[40vh] w-8/10 fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-2xl bg-slate-700 max-w-[530px]">
+    <div className="bg-black/90 fixed inset-0   z-10">
+
+    <div className="border h-[40vh] w-8/10 fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-2xl bg-slate-700 max-w-[530px] min-h-[330px]">
       <div className="flex w-full justify-between px-5 pt-5 items-center">
         <p className="opacity-0"></p>
         <button className="bg-red-600 w-[33px] h-[33px] rounded text-2xl text-black font-black cursor-pointer hover:bg-red-700" onClick={handleCloseModal}>
@@ -59,7 +61,7 @@ export const RegisterModal = () => {
               name: e.target.value,
             })
           }
-        />
+          />
         <input
           type="password"
           className="bg-white border rounded px-4"
@@ -70,9 +72,10 @@ export const RegisterModal = () => {
               password: e.target.value,
             })
           }
-        />
+          />
         <button className="bg-white w-8/10 m-auto rounded font-bold cursor-pointer hover:bg-slate-400">Registrarse</button>
       </form>
     </div>
+          </div>
   );
 };
