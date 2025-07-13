@@ -11,6 +11,14 @@ export const login = async (email: string, password: string) => {
   });
   return response.data;
 };
+export const register = async (email: string, name: string, password: string) => {
+  const response = await axios.post(`${BASE_URL}/register`, {
+    email: email,
+    name: name,
+    password: password,
+  });
+  return response.data;
+};
 
 
 // Para obtener el perfil del usuario

@@ -7,8 +7,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../redux/store";
 import Swal from "sweetalert2";
 import { openModalAddCat } from "../redux/features/modal/modalSlice";
-import { setLoggedIn } from "../redux/features/auth/authSlice";
+import { setLoggedIn, setProfile } from "../redux/features/auth/authSlice";
 import { setCats } from "../redux/features/cats/catsSlice";
+import { getProfile } from "../http/crudAuth";
 
 export const MainScreen = () => {
 
@@ -20,6 +21,12 @@ export const MainScreen = () => {
     const response = await getAllCats();
     dispatch(setCats(response));
   };
+   const setterProfile = async () => {
+      const response = await getProfile();
+      
+        dispatch(setProfile(response))
+      
+    };
 
   const handleAddCatClick = async () => {
     if (!isLoggedIn) {
@@ -44,7 +51,9 @@ export const MainScreen = () => {
   useEffect(() => {
     getCats();
   }, [catsArray]);
-
+  useEffect(() => {
+    setterProfile()
+  }, [])
   return (
     <div>
       <Header />

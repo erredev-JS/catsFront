@@ -1,5 +1,7 @@
 import { FC } from "react"
 import { ICat } from "../../types/ICat"
+import { useSelector } from "react-redux"
+import { RootState } from "../../redux/store"
 
 interface Props {
     cat: ICat
@@ -7,9 +9,12 @@ interface Props {
 
 
 export const CardCat: FC<Props> = ({cat}) => {
+      const profile = useSelector((state: RootState) => state.auth.profile)
+
   return (
     <div className="w-[280px] h-[360px] border rounded-2xl overflow-hidden m-auto">
         <div className="h-1/2 border-b bg-slate-700">
+            {profile?.email == cat.userEmail && '...'}
             <img src="https://images.unsplash.com/photo-1595433707802-6b2626ef1c91?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8Z2F0aXRvfGVufDB8fDB8fHww" alt="" className="w-full h-full object-contain" />
         </div>
         <div className="flex flex-col justify-center text-center h-1/2 py-6">

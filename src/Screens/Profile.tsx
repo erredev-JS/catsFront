@@ -1,20 +1,13 @@
-import { useEffect, useState } from "react";
 import { Header } from "../Components/Ui/Header/Header";
-import { getProfile } from "../http/crudAuth";
-import { IProfile } from "../types/IProfile";
+
+import { useSelector } from "react-redux";
+import { RootState } from "../redux/store";
 
 export const Profile = () => {
 
-    const [profile, setProfile] = useState<IProfile>()
+    const profile = useSelector((state: RootState) => state.auth.profile)
 
-  const gettProfile = async () => {
-    const response = await getProfile();
-    setProfile(response)
-  };
 
-  useEffect(() => {
-    gettProfile();
-  }, []);
   return (
     <>
       <Header />
