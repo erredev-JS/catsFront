@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Header } from "../Components/Ui/Header/Header";
-import { getAllCats } from "../http/crudCats";
+import { getAllCats, getOwnCats } from "../http/crudCats";
 import { ICat } from "../types/ICat";
 import { ListCats } from "../Components/ListCats/ListCats";
 import { useDispatch, useSelector } from "react-redux";
@@ -21,6 +21,14 @@ export const MainScreen = () => {
     const response = await getAllCats();
     dispatch(setCats(response));
   };
+
+
+  const getMyCats = async () => {
+    if(isLoggedIn){
+      const response = await getOwnCats();
+      console.log(response)}
+  };
+
    const setterProfile = async () => {
       const response = await getProfile();
       
@@ -50,6 +58,7 @@ export const MainScreen = () => {
 
   useEffect(() => {
     getCats();
+    getMyCats();
   }, [catsArray]);
   useEffect(() => {
     setterProfile()
