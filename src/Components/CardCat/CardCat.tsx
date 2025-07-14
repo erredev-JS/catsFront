@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC } from "react";
 import { ICat } from "../../types/ICat";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
