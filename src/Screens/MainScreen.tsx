@@ -12,29 +12,27 @@ import { setCats } from "../redux/features/cats/catsSlice";
 import { getProfile } from "../http/crudAuth";
 
 export const MainScreen = () => {
-
-  const catsArray = useSelector((state: RootState) => state.cats.catsArray)
+  const catsArray = useSelector((state: RootState) => state.cats.catsArray);
 
   const isLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
-  const dispatch = useDispatch<AppDispatch>()
+  const dispatch = useDispatch<AppDispatch>();
   const getCats = async () => {
     const response = await getAllCats();
     dispatch(setCats(response));
   };
 
-
   const getMyCats = async () => {
-    if(isLoggedIn){
+    if (isLoggedIn) {
       const response = await getOwnCats();
-      console.log(response)}
+      console.log(response);
+    }
   };
 
-   const setterProfile = async () => {
-      const response = await getProfile();
-      
-        dispatch(setProfile(response))
-      
-    };
+  const setterProfile = async () => {
+    const response = await getProfile();
+
+    dispatch(setProfile(response));
+  };
 
   const handleAddCatClick = async () => {
     if (!isLoggedIn) {
@@ -42,10 +40,9 @@ export const MainScreen = () => {
         icon: "error",
         title: "Un momento..",
         text: "Primero debes iniciar sesión",
-     
       });
-    }else{
-      dispatch(openModalAddCat())
+    } else {
+      dispatch(openModalAddCat());
     }
   };
 
@@ -61,13 +58,13 @@ export const MainScreen = () => {
     getMyCats();
   }, [catsArray]);
   useEffect(() => {
-    setterProfile()
-  }, [])
+    setterProfile();
+  }, []);
   return (
     <div>
       <Header />
       <div className="flex flex-row w-8/10 m-auto justify-between items-center mt-5 ">
-        <h1 className="text-2xl font-black text-center">Gatos disponibles</h1>
+        <h1 className="text-3xl font-black text-center">Gatos disponibles</h1>
         <button className="bg-green-500 font-bold  rounded text-white cursor-pointer p-2" onClick={handleAddCatClick}>
           Agregar gato
         </button>
