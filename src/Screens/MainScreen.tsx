@@ -10,6 +10,7 @@ import { openModalAddCat } from "../redux/features/modal/modalSlice";
 import { setLoggedIn, setProfile } from "../redux/features/auth/authSlice";
 import { setCats } from "../redux/features/cats/catsSlice";
 import { getProfile } from "../http/crudAuth";
+import { Footer } from "../Components/Footer/Footer";
 
 export const MainScreen = () => {
   const catsArray = useSelector((state: RootState) => state.cats.catsArray);
@@ -51,7 +52,9 @@ export const MainScreen = () => {
     getCats();
   }, [catsArray]);
   useEffect(() => {
-    setterProfile();
+    if(isLoggedIn){
+      setterProfile();
+    }
   }, []);
   return (
     <div>
@@ -63,6 +66,7 @@ export const MainScreen = () => {
         </button>
       </div>
       <ListCats catsArray={catsArray} />
+      <Footer/>
     </div>
   );
 };

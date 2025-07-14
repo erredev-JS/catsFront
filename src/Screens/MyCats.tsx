@@ -5,6 +5,7 @@ import { getOwnCats } from "../http/crudCats";
 import { useEffect, useState } from "react";
 import { ICat } from "../types/ICat";
 import { Header } from "../Components/Ui/Header/Header";
+import { Footer } from "../Components/Footer/Footer";
 
 export const MyCats = () => {
 
@@ -29,6 +30,7 @@ export const MyCats = () => {
         <Header/>
        <h1 className="text-3xl text-center font-bold mt-4">Mis gatos</h1>
         <ListCats catsArray={ownCats}/>
+        <Footer/>
     </div>
   )
 }

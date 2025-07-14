@@ -2,6 +2,7 @@ import axios from "axios";
 
 import {  store } from "../redux/store";
 import Swal from "sweetalert2";
+import { setNotLoggedIn } from "../redux/features/auth/authSlice";
 
 export const AxiosInterceptor = axios.create();
 
@@ -39,14 +40,15 @@ AxiosInterceptor.interceptors.response.use(
                       text: "Petición incorrecta.",
                    
                     });
-           break;
-      case 401:
-            Swal.fire({
-                      icon: "error",
-                      title: "Error 401",
-                      text: "No autorizado, quizás se venció la sesión",
-                   
-                    });        
+                    break;
+                    case 401:
+                      Swal.fire({
+                        icon: "error",
+                        title: "Error 401",
+                        text: "No autorizado, quizás se venció la sesión",
+                        
+                      });        
+                      store.dispatch(setNotLoggedIn())
                     break;
                     case 403: 
                     Swal.fire({

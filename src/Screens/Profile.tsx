@@ -2,6 +2,7 @@ import { Header } from "../Components/Ui/Header/Header";
 
 import { useSelector } from "react-redux";
 import { RootState } from "../redux/store";
+import { Footer } from "../Components/Footer/Footer";
 
 export const Profile = () => {
 
@@ -28,6 +29,7 @@ export const Profile = () => {
             </p>
         </div>
       </div>
+      <Footer/>
     </>
   );
 };
