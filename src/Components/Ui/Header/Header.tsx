@@ -13,7 +13,7 @@ export const Header = () => {
     <header className="h-[8vh] bg-slate-700 flex items-center px-2 justify-between">
       <h1 className="text-white text-2xl font-black cursor-pointer" onClick={() => navigate("/")}>Cattlify</h1>
       
-      <div className="w-1/4 flex justify-around items-center">
+      <div className="w-2/4 flex justify-around items-center">
         {isLoggedIn ? (
           <span className="material-symbols-outlined cursor-pointer" onClick={() => navigate("/profile")}>account_circle</span>
         ) : (
@@ -22,9 +22,14 @@ export const Header = () => {
         </button>
       )}
       {isLoggedIn ? (
+        <>
+        <button className="bg-white px-2 py-1 rounded cursor-pointer" onClick={() => navigate("/MyCats")}>
+          Mis gatos
+        </button>
         <button className="bg-white px-2 py-1 rounded cursor-pointer" onClick={() => dispatch(setNotLoggedIn())}>
           Cerrar sesión
         </button>
+        </>
       ) : null}
       </div>
     </header>

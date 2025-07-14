@@ -21,13 +21,7 @@ export const MainScreen = () => {
     dispatch(setCats(response));
   };
 
-  const getMyCats = async () => {
-    if (isLoggedIn) {
-      const response = await getOwnCats();
-      console.log(response);
-    }
-  };
-
+ 
   const setterProfile = async () => {
     const response = await getProfile();
 
@@ -55,7 +49,6 @@ export const MainScreen = () => {
 
   useEffect(() => {
     getCats();
-    getMyCats();
   }, [catsArray]);
   useEffect(() => {
     setterProfile();
