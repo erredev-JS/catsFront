@@ -4,10 +4,12 @@ import { ICat } from "../../../types/ICat";
 
 interface CatsState {
     catsArray: ICat[]
+    activeCat: ICat | null
 }
 
 const initialState: CatsState = {
-    catsArray: []
+    catsArray: [],
+    activeCat: null
 }
 
 const catsSlice = createSlice({
@@ -17,12 +19,16 @@ const catsSlice = createSlice({
         setCats: (state, action: PayloadAction<ICat[]>) => {
             state.catsArray = action.payload
         },
+        setActiveCat: (state, action: PayloadAction<ICat>) => {
+            state.activeCat = action.payload
+        }
     }
 })
 
 
 export const {
- setCats
+ setCats,
+ setActiveCat
 } =  catsSlice.actions
 
 export default catsSlice.reducer

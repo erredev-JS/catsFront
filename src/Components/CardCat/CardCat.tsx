@@ -3,6 +3,7 @@ import { ICat } from "../../types/ICat";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 import { openModalMoreOptions } from "../../redux/features/modal/modalSlice";
+import { setActiveCat } from "../../redux/features/cats/catsSlice";
 
 interface Props {
   cat: ICat;
@@ -16,18 +17,19 @@ export const CardCat: FC<Props> = ({ cat }) => {
 
   const openOptions = () => {
     dispatch(openModalMoreOptions())
+    dispatch(setActiveCat(cat))
   };
 
   return (
     <div className="w-[280px] h-[360px] border rounded-2xl overflow-hidden m-auto relative">
       <div className="h-1/2 border-b bg-slate-700">
-        {profile?.email == cat.userEmail && (
+  
           <div>
               <span className="material-symbols-outlined text-white absolute right-2 top-2 cursor-pointer scale-145 z-10" onClick={openOptions}>
                 more_vert
               </span>
           </div>
-        )}
+     
         <img src="https://images.unsplash.com/photo-1595433707802-6b2626ef1c91?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8Z2F0aXRvfGVufDB8fDB8fHww" alt="" className="w-full h-full object-contain" />
       </div>
       <div className="flex flex-col justify-center text-center h-1/2 py-6">

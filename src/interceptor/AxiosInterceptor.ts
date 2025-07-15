@@ -45,10 +45,9 @@ AxiosInterceptor.interceptors.response.use(
                       Swal.fire({
                         icon: "error",
                         title: "Error 401",
-                        text: "No autorizado, quizás se venció la sesión",
+                        text: error.response.data.message || 'No autorizado.'
                         
                       });        
-                      store.dispatch(setNotLoggedIn())
                     break;
                     case 403: 
                     Swal.fire({

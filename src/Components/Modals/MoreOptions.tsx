@@ -1,12 +1,20 @@
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../redux/store";
 import { closeModalMoreOptions } from "../../redux/features/modal/modalSlice";
+import { deleteCat } from "../../http/crudCats";
 
 export const MoreOptions = () => {
         const dispatch = useDispatch<AppDispatch>();
+        const activeCat = useSelector((state: RootState) => state.cats.activeCat)
       const handleCloseModal = () => {
         dispatch(closeModalMoreOptions());
       };
+
+      const handleDeleteCat = async () => {
+        if(activeCat){
+          await deleteCat(activeCat.id)
+        }
+      }
       const isOpen = useSelector((state: RootState) => state.modal.moreOptionsIsOpen)
 
       if(!isOpen) return null
@@ -21,7 +29,7 @@ export const MoreOptions = () => {
           
                   <div className="border bg-slate-400 font-bold hover:scale-105 hover:bg-slate-600  transition cursor-pointer h-1/3 flex items-center justify-center">Dar like</div>
                   <div className="border bg-slate-400 font-bold hover:scale-105 hover:bg-slate-600 transition text-amber-300 cursor-pointer h-1/3 flex items-center justify-center">Editar</div>
-                  <div className="border bg-slate-400 font-bold hover:scale-105 hover:bg-slate-600 transition text-red-500 cursor-pointer h-1/3 flex items-center justify-center">Eliminar</div>
+                  <div className="border bg-slate-400 font-bold hover:scale-105 hover:bg-slate-600 transition text-red-500 cursor-pointer h-1/3 flex items-center justify-center" onClick={handleDeleteCat}>Eliminar</div>
                 </div>
 
     </div>
