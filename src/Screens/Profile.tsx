@@ -13,19 +13,19 @@ export const Profile = () => {
     <>
       <Header />
       <div>
-        <h1 className="text-center text-3xl font-black">Mi perfil de Cattlify</h1>
-        <div className="flex flex-col flex-wrap w-8/10 m-auto gap-5">
+        <h1 className="text-center text-3xl  mt-4 font-black">Mi perfil de Cattlify</h1>
+        <div className="flex bg-slate-700 text-white flex-col shadow-2xl flex-wrap w-8/10 m-auto gap-5 border rounded-2xl p-4 text-center mt-16">
             <p className="text-3xl">
-            ID de Usuario: <br /> {profile?.id}
+            ID de Usuario:  {profile?.id}
             </p>
             <p className="text-3xl">
-            Email: <br /> {profile?.email}
+            Email:  {profile?.email}
             </p>
             <p className="text-3xl">
-            Nombre: <br /> {profile?.name}
+            Nombre:  {profile?.name}
             </p>
             <p className="text-3xl">
-            Rol: <br /> {profile?.role}
+            Rol:  {profile?.role}
             </p>
         </div>
       </div>

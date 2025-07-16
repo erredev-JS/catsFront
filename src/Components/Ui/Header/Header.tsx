@@ -17,7 +17,7 @@ export const Header = () => {
         {isLoggedIn ? (
           <span className="material-symbols-outlined cursor-pointer scale-125 text-white" onClick={() => navigate("/profile")}>account_circle</span>
         ) : (
-          <button className="bg-white px-2 py-1 rounded cursor-pointer absolute right-4" onClick={() => {
+          <button className="bg-white hover:bg-white/70 px-2 py-1 rounded cursor-pointer absolute right-4" onClick={() => {
             dispatch(openModalLogin())
           }}>
           Login
@@ -25,10 +25,10 @@ export const Header = () => {
       )}
       {isLoggedIn ? (
         <>
-        <button className="bg-white px-2 py-1 rounded cursor-pointer" onClick={() => navigate("/MyCats")}>
+        <button className="bg-white hover:bg-white/70 px-2 py-1 rounded cursor-pointer" onClick={() => navigate("/MyCats")}>
           Mis gatos
         </button>
-        <button className="bg-white px-2 py-1 rounded cursor-pointer" onClick={() => {
+        <button className="bg-white hover:bg-white/70 px-2 py-1 rounded cursor-pointer" onClick={() => {
           dispatch(setNotLoggedIn())
           navigate("/")
           }}>
