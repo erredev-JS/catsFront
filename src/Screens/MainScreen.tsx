@@ -19,7 +19,7 @@ export const MainScreen = () => {
   const isLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
   const dispatch = useDispatch<AppDispatch>();
   const getCats = async () => {
-    const response = await getCatsPaged(10, selectedPage);
+    const response = await getCatsPaged(4, selectedPage);
     dispatch(setCats(response.result));
     setPages(response.totalPages);
   };
@@ -67,7 +67,7 @@ export const MainScreen = () => {
         </button>
       </div>
       <ListCats catsArray={catsArray} />
-      <div className="flex gap-6 m-auto w-1/3 justify-center mt-2">{pageButtons}</div>
+      <div className="flex gap-6 m-auto w-1/3 justify-center mt-2 z-10">{pageButtons}</div>
       <Footer />
     </div>
   );
