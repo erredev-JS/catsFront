@@ -17,6 +17,11 @@ export const getOwnCats = async () => {
   const response = await AxiosInterceptor.get(`${BASE_URL}/ownCats`);
   return response.data;
 };
+export const getOwnCatsPaged = async (pageSelected: number, size: number = 10) => {
+  const response = await AxiosInterceptor.get(`${BASE_URL}/ownCats/${size}/${pageSelected}`);
+  return response.data
+};
+
 
 export const postCat = async (name: string, age: number, breedId: number) => {
   try {

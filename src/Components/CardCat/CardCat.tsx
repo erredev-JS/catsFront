@@ -21,7 +21,7 @@ export const CardCat: FC<Props> = ({ cat }) => {
   };
 
   return (
-    <div className="w-[280px] h-[360px] border rounded-2xl overflow-hidden m-auto relative">
+    <div className="w-[280px] min-w-[280px] min-h-[270px] h-[360px] border rounded-2xl overflow-hidden relative">
       <div className="h-1/2 border-b bg-slate-700">
   
           <div>

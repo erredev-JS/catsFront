@@ -46,7 +46,7 @@ export const MainScreen = () => {
 
   for (let i = 1; i <= pages; i++) {
     {
-      pageButtons.push(<div className={`border h-7 w-7 text-center text-white font-bold cursor-pointer ${selectedPage === i-1 ? "bg-blue-600" : "bg-slate-600"}`} onClick={() => setSelectedPage(i-1)}>{i}</div>);
+      pageButtons.push(<div key={i} className={`border h-7 w-7 text-center text-white font-bold cursor-pointer ${selectedPage === i-1 ? "bg-blue-600" : "bg-slate-600"}`} onClick={() => setSelectedPage(i-1)}>{i}</div>);
     }
   }
   useEffect(() => {
@@ -67,7 +67,7 @@ export const MainScreen = () => {
         </button>
       </div>
       <ListCats catsArray={catsArray} />
-      <div className="flex gap-6 m-auto w-1/3 justify-center mt-2 z-10">{pageButtons}</div>
+      <div className="flex  gap-6 m-auto w-1/3 justify-center mt-2 z-10">{pageButtons}</div>
       <Footer />
     </div>
   );
