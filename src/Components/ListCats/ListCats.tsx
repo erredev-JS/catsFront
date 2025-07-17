@@ -7,7 +7,7 @@ interface Props {
 }
 
 export const ListCats: FC<Props> = ({ catsArray }) => {
-  return <div className="mt-8 flex flex-row flex-wrap gap-5 h-[72.8vh] overflow-auto">
+  return <div className="flex flex-row flex-wrap gap-5 h-[68.8vh] overflow-auto mt-2">
     {catsArray.map((cat) => <CardCat cat={cat} key={cat.id}/>)}
   </div>;
 };
