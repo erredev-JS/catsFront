@@ -11,7 +11,6 @@ interface Props {
 
 export const CardCat: FC<Props> = ({ cat }) => {
 
-  const profile = useSelector((state: RootState) => state.auth.profile);
 
   const dispatch = useDispatch()
 
@@ -21,7 +20,7 @@ export const CardCat: FC<Props> = ({ cat }) => {
   };
 
   return (
-    <div className="w-[280px] min-w-[280px] min-h-[270px] h-[360px] border rounded-2xl overflow-hidden relative">
+    <div className=" bg-amber-50 w-[280px] min-w-[280px] min-h-[270px] h-[360px]  rounded-2xl overflow-hidden relative">
       <div className="h-1/2 border-b bg-slate-700">
   
           <div>

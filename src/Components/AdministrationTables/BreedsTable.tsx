@@ -1,23 +1,36 @@
-import {  useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { IBreed } from "../../types/IBreed";
-import { getAllBreed } from "../../http/crudBreeds";
-
+import {  getBreedsPaged } from "../../http/crudBreeds";
 
 export const BreedsTable = () => {
+  const [breedsArray, setBreedsArray] = useState<IBreed[]>([]);
 
-    const [breedsArray, setBreedsArray] = useState<IBreed[]>([]);
-
- 
-
+  const [pages, setPages] = useState(1);
+  const [selectedPage, setSelectedPage] = useState(0);
 
   const getAllBreeds = async () => {
-    const response = await getAllBreed();
-    setBreedsArray(response);
+    const response = await getBreedsPaged(10, selectedPage);
+    setBreedsArray(response.result);
+    setPages(response.totalPages);
   };
+
   useEffect(() => {
-    getAllBreeds()
-  }, [])
+    getAllBreeds();
+  }, [selectedPage]);
+
+  const pageButtons = [];
+
+  for (let i = 1; i <= pages; i++) {
+    {
+      pageButtons.push(
+        <div key={i} className={`border h-7 w-7 text-center text-white font-bold cursor-pointer ${selectedPage === i - 1 ? "bg-blue-600" : "bg-slate-600"}`} onClick={() => setSelectedPage(i - 1)}>
+          {i}
+        </div>
+      );
+    }
+  }
   return (
+      <>
     <div className="relative overflow-x-auto min-h-[400px] dark:bg-gray-800 w-9/10 m-auto mt-5">
       <table className="w-full m-auto  text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -51,5 +64,7 @@ export const BreedsTable = () => {
         </tbody>
       </table>
     </div>
+       <div className="flex  gap-6 m-auto w-1/3 justify-center mt-2 z-10">{pageButtons}</div>
+        </>
   );
 };

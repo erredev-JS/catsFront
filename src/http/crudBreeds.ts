@@ -9,3 +9,8 @@ export const getAllBreed = async () => {
     return response.data
 
 }
+
+export const getBreedsPaged = async (pageSelected: number, size: number = 10) => {
+  const response = await axios.get(`${BASE_URL}/${size}/${pageSelected}`);
+  return response.data
+};

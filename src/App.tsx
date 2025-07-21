@@ -7,7 +7,7 @@ import { AppRoutes } from "./Components/Routes/AppRoutes";
 
 function App() {
   return (
-    <div>
+    <div className="bg-gradient-to-r from-zinc-900 to-cyan-600 min-h-[100vh]">
       <AppRoutes/>
       <LoginModal />
       <RegisterModal />

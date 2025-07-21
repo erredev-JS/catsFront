@@ -16,7 +16,7 @@ export const Header = () => {
       <h1 className="text-white text-2xl font-black cursor-pointer" onClick={() => navigate("/")}>Cattlify</h1>
       
       <div className="w-2/4 max-w-[320px] flex justify-around items-center ">
-      {user?.role === 'admin' && <span className="material-symbols-outlined text-white scale-105" onClick={() => navigate('/admin')}>
+      {user?.role === 'admin' && <span className="material-symbols-outlined text-white scale-105 cursor-pointer" onClick={() => navigate('/admin')}>
 inventory_2
 </span>}
         {isLoggedIn ? (
