@@ -5,10 +5,19 @@ import { Header } from "../Components/Ui/Header/Header";
 import { BreedsTable } from "../Components/AdministrationTables/BreedsTable";
 import { useState } from "react";
 import { UsersTable } from "../Components/AdministrationTables/UsersTable";
+import { useSelector } from "react-redux";
+import { RootState } from "../redux/store";
 
 export const Administration = () => {
 
+      const profile = useSelector((state: RootState) => state.auth.profile);
+
+
     const [tableSelected, setTableSelected] = useState(1)
+
+    if(profile?.role !== 'admin'){
+      return null
+    }
 
   return (
     <div>
