@@ -1,13 +1,17 @@
 import { useEffect, useState } from "react";
 import { IUser } from "../../types/IUser";
 import { getUsersPaged } from "../../http/crudUsers";
+import { openModalRegister } from "../../redux/features/modal/modalSlice";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../redux/store";
 
 
 export const UsersTable = () => {
   const [usersArray, setUsersArray] = useState<IUser[]>([]);
    const [pages, setPages] = useState(1);
     const [selectedPage, setSelectedPage] = useState(0);
-  
+      const dispatch = useDispatch<AppDispatch>();
+
     const getAllBreeds = async () => {
       const response = await getUsersPaged(10, selectedPage);
       setUsersArray(response.result);
@@ -35,9 +39,9 @@ export const UsersTable = () => {
       <div className="relative overflow-x-auto min-h-[400px] max-h-[400px] dark:bg-gray-800 w-9/10 m-auto mt-5">
       <table className="w-full m-auto  text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-          <tr>
+          <tr >
             <th scope="col" className="px-6 py-3">
-              Nombre del usuario
+              Nombre
             </th>
             <th scope="col" className="px-6 py-3">
               Email
@@ -45,9 +49,9 @@ export const UsersTable = () => {
             <th scope="col" className="px-6 py-3 ">
               Rol
             </th>
-            <th scope="col" className="px-6 py-3 text-center">
-              Opciones
-            </th>
+            <button  className="px-6 py-3 text-center absolute right-0 bg-green-500 hover:bg-green-600 text-white font-bold w-0.3/10 cursor-pointer" onClick={() =>  dispatch(openModalRegister())}>
+              Añadir 
+            </button>
           </tr>
         </thead>
         <tbody>
@@ -58,7 +62,7 @@ export const UsersTable = () => {
               </th>
               <td className="px-6 py-4">{user.email}</td>
               <td className="px-6 py-4">{user.role}</td>
-              <td className="px-6 py-4 flex justify-around">
+              <td className="py-4 flex justify-around">
                 <button type="button" className="focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-2 py-2.5 me-2 mb-2 dark:focus:ring-yellow-900">
                   <span className="material-symbols-outlined">edit</span>
                 </button>

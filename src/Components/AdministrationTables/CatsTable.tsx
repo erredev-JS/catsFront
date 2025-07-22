@@ -3,6 +3,7 @@ import { setCats } from "../../redux/features/cats/catsSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../redux/store";
 import { getCatsPaged } from "../../http/crudCats";
+import { openModalAddCat } from "../../redux/features/modal/modalSlice";
 
 export const CatsTable = () => {
   const catsArray = useSelector((state: RootState) => state.cats.catsArray);
@@ -35,8 +36,8 @@ export const CatsTable = () => {
       <>
       <div className="relative overflow-x-auto min-h-[400px] max-h-[400px] dark:bg-gray-800 w-9/10 m-auto mt-5">
       <table className="w-full m-auto  text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-        <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-          <tr>
+        <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 w-[3400px]">
+          <tr className="">
             <th scope="col" className="px-6 py-3">
               Nombre del gato
             </th>
@@ -46,9 +47,10 @@ export const CatsTable = () => {
             <th scope="col" className="px-6 py-3 ">
               Edad
             </th>
-            <th scope="col" className="px-6 py-3 text-center">
-              Opciones
-            </th>
+            <button  className="px-6 py-3 text-center absolute right-0 bg-green-500 hover:bg-green-600 text-white font-bold w-0.3/10 cursor-pointer" onClick={() =>  dispatch(openModalAddCat())}>
+              Añadir 
+            </button>
+
           </tr>
         </thead>
         <tbody>
@@ -59,7 +61,7 @@ export const CatsTable = () => {
               </th>
               <td className="px-6 py-4">{cat.breed.name}</td>
               <td className="px-6 py-4">{cat.age}</td>
-              <td className="px-6 py-4 flex justify-around">
+              <td className="py-4 flex justify-around">
                 <button type="button" className="focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-2 py-2.5 me-2 mb-2 dark:focus:ring-yellow-900">
                   <span className="material-symbols-outlined">edit</span>
                 </button>

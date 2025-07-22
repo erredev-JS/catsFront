@@ -1,9 +1,11 @@
-import { FormEvent, useState } from "react";
+import { FC, FormEvent, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../redux/store";
 import { closeModalRegister } from "../../redux/features/modal/modalSlice";
 import { register } from "../../http/crudAuth";
 import Swal from "sweetalert2";
+
+
 
 export const RegisterModal = () => {
   const isOpen = useSelector((state: RootState) => state.modal.registerIsOpen);
@@ -51,7 +53,7 @@ export const RegisterModal = () => {
         </div>
 
         <form action="" className="flex flex-col w-1/2 m-auto gap-6" onSubmit={handleSubmit}>
-          <h1 className="text-center text-2xl font-bold text-white">Registro</h1>
+          <h1 className="text-center text-2xl font-bold text-white">Registrar usuario</h1>
           <input
             type="text"
             className="bg-white border rounded px-4"
@@ -85,7 +87,7 @@ export const RegisterModal = () => {
               })
             }
           />
-          <button className="bg-white w-8/10 m-auto rounded font-bold cursor-pointer hover:bg-slate-400" type="submit">Registrarse</button>
+          <button className="bg-white w-8/10 m-auto rounded font-bold cursor-pointer hover:bg-slate-400" type="submit">Registrar</button>
         </form>
       </div>
     </div>

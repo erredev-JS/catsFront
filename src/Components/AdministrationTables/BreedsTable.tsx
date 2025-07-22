@@ -41,9 +41,10 @@ export const BreedsTable = () => {
             <th scope="col" className="px-6 py-3">
               Nombre de la raza
             </th>
-            <th scope="col" className="px-6 py-3 text-center">
-              Opciones
-            </th>
+            <button  className="px-6 py-3 text-center absolute right-0 bg-green-500 hover:bg-green-600 text-white font-bold w-0.3/10 cursor-pointer">
+              Añadir 
+            </button>
+           
           </tr>
         </thead>
         <tbody>
@@ -51,7 +52,7 @@ export const BreedsTable = () => {
             <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200">
               <td className="px-6 py-4">{breed.id}</td>
               <td className="px-6 py-4">{breed.name}</td>
-              <td className="px-6 py-4 flex justify-around">
+              <td className="px-2 py-4 flex justify-around max-w-[500px] lg:max-w-[500px]">
                 <button type="button" className="focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-2 py-2.5 me-2 mb-2 dark:focus:ring-yellow-900">
                   <span className="material-symbols-outlined">edit</span>
                 </button>
