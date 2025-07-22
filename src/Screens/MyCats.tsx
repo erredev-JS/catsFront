@@ -39,7 +39,7 @@ export const MyCats = () => {
   return (
     <div>
       <Header />
-      <h1 className="text-3xl text-center font-bold mt-4">Mis gatos</h1>
+      <h1 className="text-3xl text-center font-bold mt-4 text-white">Mis gatos</h1>
       <ListCats catsArray={ownCats} />
 
             <div className="flex  gap-6 m-auto w-1/3 justify-center mt-2 z-10">{pageButtons}</div>

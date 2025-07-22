@@ -61,13 +61,13 @@ export const MainScreen = () => {
     <div>
       <Header />
       <div className="flex flex-row w-8/10 m-auto justify-between items-center mt-5 ">
-        <h1 className="text-2xl md:text-3xl font-black text-center">Gatos disponibles</h1>
+        <h1 className="text-2xl md:text-3xl font-black text-center text-white">Gatos disponibles</h1>
         <button className="bg-green-500 font-bold  rounded text-white cursor-pointer p-2" onClick={handleAddCatClick}>
           Agregar gato
         </button>
       </div>
       <ListCats catsArray={catsArray} />
-      <div className="flex  gap-6 m-auto w-1/3 justify-center mt-2 z-10">{pageButtons}</div>
+      <div className="flex  gap-6 m-auto w-1/3 justify-center  z-10">{pageButtons}</div>
       <Footer />
     </div>
   );
