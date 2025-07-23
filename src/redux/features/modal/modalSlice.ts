@@ -4,6 +4,7 @@ interface ModalState {
   loginIsOpen: boolean;
   registerIsOpen: boolean;
   addCatIsOpen: boolean;
+  editCatIsOpen: boolean;
   moreOptionsIsOpen: boolean;
 }
 
@@ -11,6 +12,7 @@ const initialState: ModalState = {
   loginIsOpen: false,
   registerIsOpen: false,
   addCatIsOpen: false,
+  editCatIsOpen: false,
   moreOptionsIsOpen: false,
 };
 
@@ -53,10 +55,19 @@ const modalSlice = createSlice({
     },
     toggleModalMoreOption: (state) => {
       state.moreOptionsIsOpen = !state.moreOptionsIsOpen
+    },
+    openModalEditCat: (state) => {
+      state.editCatIsOpen = true
+    },
+    closeModalEditCat: (state) => {
+      state.editCatIsOpen = false
+    },
+    toggleModalEditCat: (state) => {
+      state.editCatIsOpen = !state.editCatIsOpen
     }
   },
 });
 
-export const { openModalLogin, closeModalLogin, toggleModalLogin, openModalRegister, closeModalRegister, toggleModalRegister, closeModalAddCat,  openModalAddCat, toggleModalAddCat, closeModalMoreOptions, openModalMoreOptions, toggleModalMoreOption} = modalSlice.actions;
+export const { openModalLogin, closeModalLogin, toggleModalLogin, openModalRegister, closeModalRegister, toggleModalRegister, closeModalAddCat,  openModalAddCat, toggleModalAddCat, closeModalMoreOptions, openModalMoreOptions, toggleModalMoreOption, closeModalEditCat, openModalEditCat, toggleModalEditCat} = modalSlice.actions;
 
 export default modalSlice.reducer;

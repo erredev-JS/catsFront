@@ -1,5 +1,6 @@
 import "./App.css";
 import { AddCatModal } from "./Components/Modals/AddCatModal";
+import { EditCatModal } from "./Components/Modals/EditCatModal";
 import { LoginModal } from "./Components/Modals/LoginModal";
 import { MoreOptions } from "./Components/Modals/MoreOptions";
 import { RegisterModal } from "./Components/Modals/RegisterModal";
@@ -13,6 +14,7 @@ function App() {
       <RegisterModal />
       <AddCatModal />
       <MoreOptions/>
+      <EditCatModal/>
     </div>
   );
 }

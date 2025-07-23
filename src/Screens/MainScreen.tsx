@@ -56,7 +56,7 @@ export const MainScreen = () => {
     if (isLoggedIn) {
       setterProfile();
     }
-  }, []);
+  }, [isLoggedIn]);
   return (
     <div>
       <Header />
