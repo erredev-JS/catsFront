@@ -49,9 +49,14 @@ export const UsersTable = () => {
             <th scope="col" className="px-6 py-3 ">
               Rol
             </th>
-            <button  className="px-6 py-3 text-center absolute right-0 bg-green-500 hover:bg-green-600 text-white font-bold w-0.3/10 cursor-pointer" onClick={() =>  dispatch(openModalRegister())}>
-              Añadir 
-            </button>
+                 <th className="px-6 py-3 text-right">
+                 <button
+                  //  onClick={() => dispatch(openModalAddCat())}
+                   className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-3 rounded"
+                 >
+                   Añadir
+                 </button>
+               </th>
           </tr>
         </thead>
         <tbody>
