@@ -5,6 +5,8 @@ import { AppDispatch, RootState } from "../../redux/store";
 import { getAllBreed } from "../../http/crudBreeds";
 import Swal from "sweetalert2";
 import { closeModalEditCat } from "../../redux/features/modal/modalSlice";
+import { getAllCats, updateCat } from "../../http/crudCats";
+import { setCats } from "../../redux/features/cats/catsSlice";
 
 export const EditCatModal = () => {
   const isOpen = useSelector((state: RootState) => state.modal.editCatIsOpen);
@@ -43,9 +45,9 @@ export const EditCatModal = () => {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // await postCat(formData.name, formData.age, formData.breedId);
-    // const updatedCats = await getAllCats();
-    // dispatch(setCats(updatedCats));
+     await updateCat(formData.name, formData.age, formData.breedId, activeCat?.id);
+     const updatedCats = await getAllCats();
+     dispatch(setCats(updatedCats));
     Swal.fire({
       toast: true,
       position: "bottom-end",
@@ -54,7 +56,7 @@ export const EditCatModal = () => {
       timerProgressBar: true,
       icon: "success",
       title: "Gatito añadido",
-      text: "Gatito añadido exitosamente",
+      text: "Gatito editado exitosamente",
     });
     dispatch(closeModalEditCat());
   };

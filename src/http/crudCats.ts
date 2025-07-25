@@ -23,6 +23,19 @@ export const getOwnCatsPaged = async (pageSelected: number, size: number = 10) =
 };
 
 
+export const updateCat = async (name: string, age: number, breedId: number, catId: number) => {
+  try {
+    const response = await AxiosInterceptor.patch(`${BASE_URL}/${catId}`, {
+      name,
+      age,
+      breedId,
+    });
+    return response.data;
+  } catch (error: any) {
+    console.error("Error al patchear el gato:", error.response?.data || error.message);
+    throw error;
+  }
+};
 export const postCat = async (name: string, age: number, breedId: number) => {
   try {
     const response = await AxiosInterceptor.post(BASE_URL, {
