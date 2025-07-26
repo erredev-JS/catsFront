@@ -1,12 +1,18 @@
 import { useEffect, useState } from "react";
 import { IBreed } from "../../types/IBreed";
 import {  getBreedsPaged } from "../../http/crudBreeds";
+import { openModalAddBreed } from "../../redux/features/modal/modalSlice";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../redux/store";
 
 export const BreedsTable = () => {
   const [breedsArray, setBreedsArray] = useState<IBreed[]>([]);
 
   const [pages, setPages] = useState(1);
   const [selectedPage, setSelectedPage] = useState(0);
+
+
+  const dispatch = useDispatch<AppDispatch>() 
 
   const getAllBreeds = async () => {
     const response = await getBreedsPaged(10, selectedPage);
@@ -43,7 +49,7 @@ export const BreedsTable = () => {
             </th>
                  <th className="px-6 py-3 text-right">
                  <button
-                  //  onClick={() => dispatch(openModalAddCat())}
+                    onClick={() => dispatch(openModalAddBreed())}
                    className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-3 rounded"
                  >
                    Añadir
