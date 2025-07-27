@@ -24,6 +24,6 @@ export const register = async (email: string, name: string, password: string) =>
 // Para obtener el perfil del usuario
 
 export const getProfile = async (): Promise<IProfile> => {
-  const response = await AxiosInterceptor.get(`${BASE_URL}/profile`);
-  return response.data;
+   const response = await AxiosInterceptor.get(`${BASE_URL}/profile`);
+   return response.data;
 };

@@ -2,11 +2,12 @@ import { useEffect, useState } from "react";
 import { IBreed } from "../../types/IBreed";
 import {  getBreedsPaged } from "../../http/crudBreeds";
 import { openModalAddBreed } from "../../redux/features/modal/modalSlice";
-import { useDispatch } from "react-redux";
-import { AppDispatch } from "../../redux/store";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../../redux/store";
+import { setBreeds } from "../../redux/features/breeds/breedsSlice";
 
 export const BreedsTable = () => {
-  const [breedsArray, setBreedsArray] = useState<IBreed[]>([]);
+  const breedsArray = useSelector((state: RootState) => state.breeds.breedsArray);
 
   const [pages, setPages] = useState(1);
   const [selectedPage, setSelectedPage] = useState(0);
@@ -16,13 +17,13 @@ export const BreedsTable = () => {
 
   const getAllBreeds = async () => {
     const response = await getBreedsPaged(10, selectedPage);
-    setBreedsArray(response.result);
+    dispatch(setBreeds(response.result))
     setPages(response.totalPages);
   };
 
   useEffect(() => {
     getAllBreeds();
-  }, [selectedPage]);
+  }, [selectedPage, breedsArray]);
 
   const pageButtons = [];
 
@@ -37,7 +38,7 @@ export const BreedsTable = () => {
   }
   return (
       <>
-    <div className="relative overflow-x-auto min-h-[400px] dark:bg-gray-800 w-9/10 m-auto mt-5">
+      <div className="relative overflow-x-auto min-h-[400px] max-h-[400px] dark:bg-gray-800 w-9/10 m-auto mt-5">
       <table className="w-full m-auto  text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
           <tr>
@@ -60,7 +61,7 @@ export const BreedsTable = () => {
         </thead>
         <tbody>
           {breedsArray.map((breed) => (
-            <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200">
+            <tr key={breed.id}className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200">
               <td className="px-6 py-4">{breed.id}</td>
               <td className="px-6 py-4">{breed.name}</td>
               <td className="px-2 py-4 flex justify-around max-w-[500px] lg:max-w-[500px]">

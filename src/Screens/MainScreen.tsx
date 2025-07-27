@@ -13,9 +13,9 @@ import { Footer } from "../Components/Footer/Footer";
 
 export const MainScreen = () => {
   const catsArray = useSelector((state: RootState) => state.cats.catsArray);
-  
+
   const [pages, setPages] = useState(1);
-  const [selectedPage, setSelectedPage] = useState(0)
+  const [selectedPage, setSelectedPage] = useState(0);
   const isLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
   const dispatch = useDispatch<AppDispatch>();
   const getCats = async () => {
@@ -28,7 +28,6 @@ export const MainScreen = () => {
 
   const setterProfile = async () => {
     const response = await getProfile();
-
     dispatch(setProfile(response));
   };
 
@@ -46,7 +45,11 @@ export const MainScreen = () => {
 
   for (let i = 1; i <= pages; i++) {
     {
-      pageButtons.push(<div key={i} className={`border h-7 w-7 text-center text-white font-bold cursor-pointer ${selectedPage === i-1 ? "bg-blue-600" : "bg-slate-600"}`} onClick={() => setSelectedPage(i-1)}>{i}</div>);
+      pageButtons.push(
+        <div key={i} className={`border h-7 w-7 text-center text-white font-bold cursor-pointer ${selectedPage === i - 1 ? "bg-blue-600" : "bg-slate-600"}`} onClick={() => setSelectedPage(i - 1)}>
+          {i}
+        </div>
+      );
     }
   }
   useEffect(() => {

@@ -1,11 +1,11 @@
 import { useDispatch, useSelector } from 'react-redux';
+import style from './AddBreedModal.module.css'
 import { AppDispatch, RootState } from '../../redux/store';
 import { FormEvent, useState } from 'react';
 import { closeModalAddBreed } from '../../redux/features/modal/modalSlice';
-import {  getBreedsPaged, postBreed } from '../../http/crudBreeds';
+import { getAllBreed, getBreedsPaged, postBreed } from '../../http/crudBreeds';
 import Swal from 'sweetalert2';
-import { setBreeds } from '../../redux/features/breeds/breedsSlice';
-export const AddBreedModal = () => {
+export const EditBreedModal = () => {
    const isOpen = useSelector((state: RootState) => state.modal.addBreedIsOpen);
 
   const [breedName, setBreedName] = useState("");
@@ -20,8 +20,8 @@ export const AddBreedModal = () => {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     await postBreed(breedName);
-    const response = await getBreedsPaged(10, 0);
-     dispatch(setBreeds(response.result));
+    const updatedBreeds = await getBreedsPaged(0, 10);
+    // dispatch(setBreeds(updatedBreeds));
     Swal.fire({
       toast: true,
       position: "bottom-end",
@@ -51,7 +51,7 @@ export const AddBreedModal = () => {
       </div>
 
       <form action="" className="flex flex-col w-1/2 m-auto gap-6" onSubmit={handleSubmit}>
-        <h1 className="text-center text-2xl font-bold text-white">Añadir raza</h1>
+        <h1 className="text-center text-2xl font-bold text-white">Añadir gato</h1>
         <input type="string" className="bg-white border rounded px-4" placeholder="Ingresa el nombre del gato" onChange={(e) => setBreedName(e.target.value)} />
         
 
