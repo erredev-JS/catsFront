@@ -1,6 +1,7 @@
 import "./App.css";
 import { AddBreedModal } from "./Components/Modals/AddBreedModal";
 import { AddCatModal } from "./Components/Modals/AddCatModal";
+import { EditBreedModal } from "./Components/Modals/EditBreedModal";
 import { EditCatModal } from "./Components/Modals/EditCatModal";
 import { LoginModal } from "./Components/Modals/LoginModal";
 import { MoreOptions } from "./Components/Modals/MoreOptions";
@@ -15,6 +16,7 @@ function App() {
       <RegisterModal />
       <AddCatModal />
       <AddBreedModal/>
+      <EditBreedModal/>
       <MoreOptions/>
       <EditCatModal/>
     </div>

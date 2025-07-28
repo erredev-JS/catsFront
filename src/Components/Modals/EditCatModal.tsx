@@ -55,7 +55,7 @@ export const EditCatModal = () => {
       timer: 3000,
       timerProgressBar: true,
       icon: "success",
-      title: "Gatito añadido",
+      title: "Gatito editado",
       text: "Gatito editado exitosamente",
     });
     dispatch(closeModalEditCat());

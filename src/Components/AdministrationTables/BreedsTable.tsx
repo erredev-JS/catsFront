@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { IBreed } from "../../types/IBreed";
 import {  getBreedsPaged } from "../../http/crudBreeds";
-import { openModalAddBreed } from "../../redux/features/modal/modalSlice";
+import { openModalAddBreed, openModalEditBreed, openModalEditCat } from "../../redux/features/modal/modalSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../redux/store";
-import { setBreeds } from "../../redux/features/breeds/breedsSlice";
+import { setActiveBreed, setBreeds } from "../../redux/features/breeds/breedsSlice";
 
 export const BreedsTable = () => {
   const breedsArray = useSelector((state: RootState) => state.breeds.breedsArray);
@@ -27,6 +27,11 @@ export const BreedsTable = () => {
 
   const pageButtons = [];
 
+const handleOpenEditModal = (breed: IBreed) => {
+  dispatch(setActiveBreed(breed))
+  dispatch(openModalEditBreed())
+}
+ 
   for (let i = 1; i <= pages; i++) {
     {
       pageButtons.push(
@@ -65,7 +70,7 @@ export const BreedsTable = () => {
               <td className="px-6 py-4">{breed.id}</td>
               <td className="px-6 py-4">{breed.name}</td>
               <td className="px-2 py-4 flex justify-around max-w-[500px] lg:max-w-[500px]">
-                <button type="button" className="focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-2 py-2.5 me-2 mb-2 dark:focus:ring-yellow-900">
+                <button type="button" className="focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-2 py-2.5 me-2 mb-2 dark:focus:ring-yellow-900" onClick={() => handleOpenEditModal(breed)}>
                   <span className="material-symbols-outlined">edit</span>
                 </button>
                 <button type="button" className="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-2 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">

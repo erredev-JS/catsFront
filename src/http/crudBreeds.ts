@@ -22,3 +22,9 @@ export const postBreed = async (breedName: string) => {
   })
   return response.data
 }
+export const updateBreed = async (breedId: number, breedName: string) => {
+  const response = await AxiosInterceptor.patch(`${BASE_URL}/${breedId}`, {
+    name: breedName
+  })
+  return response.data
+}

@@ -1,8 +1,10 @@
 import axios from "axios";
 
-import {  store } from "../redux/store";
+import { AppDispatch, store } from "../redux/store";
 import Swal from "sweetalert2";
 import { setNotLoggedIn } from "../redux/features/auth/authSlice";
+import { useDispatch } from "react-redux";
+
 
 export const AxiosInterceptor = axios.create();
 
@@ -10,7 +12,7 @@ export const AxiosInterceptor = axios.create();
 
 AxiosInterceptor.interceptors.request.use(
   (config) => {
-    const state = store.getState()
+    const state = store.getState();
     const JWTtoken = state.auth.token;
     if (JWTtoken) {
       config.headers.Authorization = `Bearer ${JWTtoken}`;
@@ -20,45 +22,40 @@ AxiosInterceptor.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
-
 // Manejo de errores con response.
 
 AxiosInterceptor.interceptors.response.use(
-  response => {
-    return response
+  (response) => {
+    return response;
   },
-  error => {
-
-    const status = error.response?.status
+  (error) => {
+    const status = error.response?.status;
 
     switch (status) {
-
       case 400:
-            Swal.fire({
-                      icon: "error",
-                      title: "Error 400",
-                      text: "Petición incorrecta.",
-                   
-                    });
-                    break;
-                    case 401:
-                      Swal.fire({
-                        icon: "error",
-                        title: "Error 401",
-                        text: error.response.data.message || 'No autorizado.'
-                        
-                      });        
-                    break;
-                    case 403: 
-                    Swal.fire({
-                      icon: "error",
-                      title: "Error 403",
-                      text: "No tienes los permisos para ejecutar esta acción",
-                   
-                    });     
-                  }
+        Swal.fire({
+          icon: "error",
+          title: "Error 400",
+          text: "Petición incorrecta.",
+        });
+        break;
+      case 401:
+        Swal.fire({
+          icon: "error",
+          title: "Error 401",
+          text: "Sesión expirada.",
+        });
+        store.dispatch(setNotLoggedIn());
+        window.location.href = "/"
+        break;
+      case 403:
+        Swal.fire({
+          icon: "error",
+          title: "Error 403",
+          text: "No tienes los permisos para ejecutar esta acción",
+        });
+    }
 
-                  return Promise.reject(error)
-                  
+    return Promise.reject(error);
   }
-)
+);

@@ -1,27 +1,32 @@
 import { useDispatch, useSelector } from 'react-redux';
 import style from './AddBreedModal.module.css'
 import { AppDispatch, RootState } from '../../redux/store';
-import { FormEvent, useState } from 'react';
-import { closeModalAddBreed } from '../../redux/features/modal/modalSlice';
-import { getAllBreed, getBreedsPaged, postBreed } from '../../http/crudBreeds';
+import { FormEvent, useEffect, useState } from 'react';
+import { closeModalAddBreed, closeModalEditBreed } from '../../redux/features/modal/modalSlice';
+import { getAllBreed, getBreedsPaged, postBreed, updateBreed } from '../../http/crudBreeds';
 import Swal from 'sweetalert2';
+import { setBreeds } from '../../redux/features/breeds/breedsSlice';
 export const EditBreedModal = () => {
-   const isOpen = useSelector((state: RootState) => state.modal.addBreedIsOpen);
+   const isOpen = useSelector((state: RootState) => state.modal.editBreedIsOpen);
+   const activeBreed = useSelector((state: RootState) => state.breeds.activeBreed);
 
   const [breedName, setBreedName] = useState("");
   const dispatch = useDispatch<AppDispatch>();
 
+  useEffect(() => {
+    setBreedName(activeBreed.name)
+  }, [activeBreed])
  
  
   const handleCloseModal = () => {
-    dispatch(closeModalAddBreed());
+    dispatch(closeModalEditBreed());
   };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    await postBreed(breedName);
-    const updatedBreeds = await getBreedsPaged(0, 10);
-    // dispatch(setBreeds(updatedBreeds));
+    await updateBreed(activeBreed.id, breedName);
+    const response = await getBreedsPaged(0, 10);
+     dispatch(setBreeds(response.result));
     Swal.fire({
       toast: true,
       position: "bottom-end",
@@ -29,10 +34,10 @@ export const EditBreedModal = () => {
       timer: 3000,
       timerProgressBar: true,
       icon: "success",
-      title: "Raza añadida",
-      text: "Raza añadida exitosamente",
+      title: "Raza actualizada",
+      text: "Raza actualizada exitosamente",
     });
-    dispatch(closeModalAddBreed());
+    dispatch(closeModalEditBreed());
   };
 
   if (!isOpen) {
@@ -50,13 +55,13 @@ export const EditBreedModal = () => {
         </button>
       </div>
 
-      <form action="" className="flex flex-col w-1/2 m-auto gap-6" onSubmit={handleSubmit}>
-        <h1 className="text-center text-2xl font-bold text-white">Añadir gato</h1>
-        <input type="string" className="bg-white border rounded px-4" placeholder="Ingresa el nombre del gato" onChange={(e) => setBreedName(e.target.value)} />
+      <form action="" className="flex flex-col w-1/2 m-auto gap-6 justify-center" onSubmit={handleSubmit}>
+        <h1 className="text-center text-2xl font-bold text-white mt-6">Editar raza</h1>
+        <input type="text" className="bg-white border rounded px-4" value={breedName} placeholder="Ingresa el nombre del gato" onChange={(e) => setBreedName(e.target.value)} />
         
 
         <button className="bg-white w-8/10 m-auto rounded font-bold cursor-pointer hover:bg-slate-400" type="submit">
-          Añadir raza
+          Editar
         </button>
       </form>
     </div>
