@@ -1,23 +1,50 @@
 import { useEffect, useState } from "react";
 import { IUser } from "../../types/IUser";
-import { getUsersPaged } from "../../http/crudUsers";
+import { deleteUserById, getUsersPaged } from "../../http/crudUsers";
 import { openModalRegister } from "../../redux/features/modal/modalSlice";
-import { useDispatch } from "react-redux";
-import { AppDispatch } from "../../redux/store";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../../redux/store";
+import Swal from "sweetalert2";
+import { setUsers } from "../../redux/features/users/usersSlice";
 
 
 export const UsersTable = () => {
-  const [usersArray, setUsersArray] = useState<IUser[]>([]);
+  const usersArray = useSelector((state: RootState) => state.users.usersArray)
    const [pages, setPages] = useState(1);
     const [selectedPage, setSelectedPage] = useState(0);
       const dispatch = useDispatch<AppDispatch>();
 
     const getAllBreeds = async () => {
       const response = await getUsersPaged(10, selectedPage);
-      setUsersArray(response.result);
+      dispatch(setUsers(response.result))
       setPages(response.totalPages);
     };
-  
+   const handleDelete = async (userId: number) => {
+    Swal.fire({
+  title: "Estas seguro?",
+  text: "No podrás revertir esta acción",
+  icon: "warning",
+  showCancelButton: true,
+  confirmButtonColor: "#3085d6",
+  cancelButtonColor: "#d33",
+  confirmButtonText: "Eliminar"
+}).then((result) => {
+  if (result.isConfirmed) {
+    deleteUserById(userId)
+    getAllBreeds()
+    Swal.fire({
+           toast: true,
+           position: "bottom-end",
+           showConfirmButton: false,
+           timer: 3000,
+           timerProgressBar: true,
+           icon: "success",
+           title: "Usuario eliminado",
+           text: "Usuario eliminado exitosamente",
+         });
+  }
+});
+   }
     useEffect(() => {
       getAllBreeds();
     }, [selectedPage]);
@@ -51,7 +78,7 @@ export const UsersTable = () => {
             </th>
                  <th className="px-6 py-3 text-right">
                  <button
-                  //  onClick={() => dispatch(openModalAddCat())}
+                   onClick={() => dispatch(openModalRegister())}
                    className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-3 rounded"
                  >
                    Añadir
@@ -68,11 +95,9 @@ export const UsersTable = () => {
               <td className="px-6 py-4">{user.email}</td>
               <td className="px-6 py-4">{user.role}</td>
               <td className="py-4 flex justify-around">
-                <button type="button" className="focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-2 py-2.5 me-2 mb-2 dark:focus:ring-yellow-900">
-                  <span className="material-symbols-outlined">edit</span>
-                </button>
+               
                 <button type="button" className="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-2 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">
-                  <span className="material-symbols-outlined">delete</span>
+                  <span className="material-symbols-outlined" onClick={() => handleDelete(user.id)}>delete</span>
                 </button>
               </td>
             </tr>

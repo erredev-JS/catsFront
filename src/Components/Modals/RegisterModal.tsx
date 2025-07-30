@@ -4,6 +4,8 @@ import { AppDispatch, RootState } from "../../redux/store";
 import { closeModalRegister } from "../../redux/features/modal/modalSlice";
 import { register } from "../../http/crudAuth";
 import Swal from "sweetalert2";
+import { setUsers } from "../../redux/features/users/usersSlice";
+import { getUsersPaged } from "../../http/crudUsers";
 
 
 
@@ -11,7 +13,11 @@ export const RegisterModal = () => {
   const isOpen = useSelector((state: RootState) => state.modal.registerIsOpen);
 
   const dispatch = useDispatch<AppDispatch>();
-
+   const getAllBreeds = async () => {
+         const response = await getUsersPaged(10, 0);
+         dispatch(setUsers(response.result))
+        
+       };
   const [formData, setFormData] = useState({
     email: "",
     name: "",
@@ -32,6 +38,7 @@ export const RegisterModal = () => {
         title: "Registro exitoso",
         text: "Usuario registrado exitosamente",
       });
+      getAllBreeds()
       dispatch(closeModalRegister())
     } catch (error) {
       alert(error)
