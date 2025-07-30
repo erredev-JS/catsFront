@@ -54,7 +54,7 @@ export const MainScreen = () => {
   }
   useEffect(() => {
     getCats();
-  }, [selectedPage]);
+  }, [selectedPage, catsArray]);
   useEffect(() => {
     if (isLoggedIn) {
       setterProfile();

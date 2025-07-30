@@ -4,7 +4,7 @@ import { AppDispatch, RootState } from "../../redux/store";
 import { closeModalAddCat } from "../../redux/features/modal/modalSlice";
 import { getAllBreed } from "../../http/crudBreeds";
 import { IBreed } from "../../types/IBreed";
-import { getAllCats, postCat } from "../../http/crudCats";
+import { getAllCats, getCatsPaged, postCat } from "../../http/crudCats";
 import { setCats } from "../../redux/features/cats/catsSlice";
 import Swal from "sweetalert2";
 
@@ -35,8 +35,8 @@ export const AddCatModal = () => {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     await postCat(formData.name, formData.age, formData.breedId);
-    const updatedCats = await getAllCats();
-    dispatch(setCats(updatedCats));
+    const updatedCats = await getCatsPaged(0,4);
+    dispatch(setCats(updatedCats.result));
     Swal.fire({
       toast: true,
       position: "bottom-end",
@@ -57,7 +57,7 @@ export const AddCatModal = () => {
   return (
     <div className="bg-black/90 fixed inset-0   z-10">
 
-    <div className="border h-[50vh] w-8/10 fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-2xl bg-slate-700 max-w-[530px] z-50">
+    <div className="border h-[40vh] w-8/10 fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-2xl bg-slate-700 max-w-[530px] z-50">
       <div className="flex w-full justify-between px-5 pt-5 items-center">
         <p className="opacity-0"></p>
         <button className="bg-red-600 w-[33px] h-[33px] rounded text-2xl text-black font-black cursor-pointer hover:bg-red-700" onClick={handleCloseModal}>
