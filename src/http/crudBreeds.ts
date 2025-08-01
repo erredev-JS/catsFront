@@ -23,8 +23,14 @@ export const postBreed = async (breedName: string) => {
   return response.data
 }
 export const updateBreed = async (breedId: number, breedName: string) => {
-  const response = await AxiosInterceptor.patch(`${BASE_URL}/${breedId}`, {
+  const response = await AxiosInterceptor.patch(
+  `${BASE_URL}/${breedId}`, {
     name: breedName
   })
+  return response.data
+}
+
+export const deleteBreedById = async (breedId: number) => {
+  const response = await AxiosInterceptor.delete(`${BASE_URL}/${breedId}`)
   return response.data
 }

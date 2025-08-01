@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { IBreed } from "../../types/IBreed";
-import {  getBreedsPaged } from "../../http/crudBreeds";
+import {  deleteBreedById, getBreedsPaged } from "../../http/crudBreeds";
 import { openModalAddBreed, openModalEditBreed, openModalEditCat } from "../../redux/features/modal/modalSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../redux/store";
 import { setActiveBreed, setBreeds } from "../../redux/features/breeds/breedsSlice";
+import Swal from "sweetalert2";
 
 export const BreedsTable = () => {
   const breedsArray = useSelector((state: RootState) => state.breeds.breedsArray);
@@ -32,6 +33,32 @@ const handleOpenEditModal = (breed: IBreed) => {
   dispatch(openModalEditBreed())
 }
  
+const handleDelete = async (breedId: number) => {
+    Swal.fire({
+  title: "Estas seguro?",
+  text: "No podrás revertir esta acción",
+  icon: "warning",
+  showCancelButton: true,
+  confirmButtonColor: "#3085d6",
+  cancelButtonColor: "#d33",
+  confirmButtonText: "Eliminar"
+}).then((result) => {
+  if (result.isConfirmed) {
+    deleteBreedById(breedId)
+    getAllBreeds()
+    Swal.fire({
+           toast: true,
+           position: "bottom-end",
+           showConfirmButton: false,
+           timer: 3000,
+           timerProgressBar: true,
+           icon: "success",
+           title: "Raza eliminada",
+           text: "Raza eliminada exitosamente",
+         });
+  }
+});
+   }
   for (let i = 1; i <= pages; i++) {
     {
       pageButtons.push(
@@ -73,7 +100,7 @@ const handleOpenEditModal = (breed: IBreed) => {
                 <button type="button" className="focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-2 py-2.5 me-2 mb-2 dark:focus:ring-yellow-900" onClick={() => handleOpenEditModal(breed)}>
                   <span className="material-symbols-outlined">edit</span>
                 </button>
-                <button type="button" className="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-2 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">
+                <button type="button" className="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-2 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900" onClick={() => handleDelete(breed.id)}>
                   <span className="material-symbols-outlined">delete</span>
                 </button>
               </td>
