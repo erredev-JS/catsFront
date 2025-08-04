@@ -84,7 +84,7 @@ export const CatsTable = () => {
                 <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                   {cat.name}
                 </th>
-                <td className="px-6 py-4">{cat.breed.name}</td>
+                <td className="px-6 py-4">{cat.breed.name}</td> 
                 <td className="px-6 py-4">{cat.age}</td>
                 <td className="py-4 flex justify-around">
                   <button type="button" className="focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-2 py-2.5 me-2 mb-2 dark:focus:ring-yellow-900" onClick={() => handleOpenModalEditCat(cat)}>

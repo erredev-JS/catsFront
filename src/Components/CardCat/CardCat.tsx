@@ -32,7 +32,7 @@ export const CardCat: FC<Props> = ({ cat }) => {
       </div>
       <div className="flex flex-col justify-center text-center h-1/2 py-6">
         <p>Nombre: {cat.name}</p>
-        <p>Raza: {cat.breed.name}</p>
+         <p>Raza: {cat.breed.name}</p> 
         <p>Edad: {cat.age}</p>
         <p>Contacto: {cat.userEmail}</p>
         <button className="bg-green-500 font-bold w-8/10 m-auto rounded text-white cursor-pointer" onClick={() => window.open(`https://mail.google.com/mail/?view=cm&to=${cat.userEmail}&su=Interesado%20en%20tu%20anuncio%20de%20${cat.name}&body=Hola,%20estoy%20interesado%20en%20tu%20publicación%20de%20${cat.name}.`)}>

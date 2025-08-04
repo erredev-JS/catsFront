@@ -7,10 +7,12 @@ import { IBreed } from "../../types/IBreed";
 import { getAllCats, getCatsPaged, postCat } from "../../http/crudCats";
 import { setCats } from "../../redux/features/cats/catsSlice";
 import Swal from "sweetalert2";
+import { setBreeds } from "../../redux/features/breeds/breedsSlice";
 
 export const AddCatModal = () => {
   const isOpen = useSelector((state: RootState) => state.modal.addCatIsOpen);
-  const [breedsArray, setBreedsArray] = useState<IBreed[]>([]);
+  const breedsArray = useSelector((state: RootState) => state.breeds.breedsArray);
+
 
   const [formData, setFormData] = useState({
     name: "",
@@ -21,7 +23,7 @@ export const AddCatModal = () => {
 
   const getAllBreeds = async () => {
     const response = await getAllBreed();
-    setBreedsArray(response);
+    dispatch(setBreeds(response));
   };
 
   useEffect(() => {
