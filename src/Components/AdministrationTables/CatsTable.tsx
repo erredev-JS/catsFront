@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { setActiveCat, setCats } from "../../redux/features/cats/catsSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../redux/store";
-import { deleteCat, getAllCats, getCatsPaged } from "../../http/crudCats";
+import { deleteCat, getCatsPaged } from "../../http/crudCats";
 import { openModalAddCat, openModalEditCat } from "../../redux/features/modal/modalSlice";
 import { ICat } from "../../types/ICat";
 import Swal from "sweetalert2";

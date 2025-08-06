@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { IBreed } from "../../types/IBreed";
 import {  deleteBreedById, getBreedsPaged } from "../../http/crudBreeds";
-import { openModalAddBreed, openModalEditBreed, openModalEditCat } from "../../redux/features/modal/modalSlice";
+import { openModalAddBreed, openModalEditBreed } from "../../redux/features/modal/modalSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../redux/store";
 import { setActiveBreed, setBreeds } from "../../redux/features/breeds/breedsSlice";

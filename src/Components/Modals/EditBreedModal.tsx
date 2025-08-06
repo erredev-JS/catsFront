@@ -1,9 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux';
-import style from './AddBreedModal.module.css'
 import { AppDispatch, RootState } from '../../redux/store';
 import { FormEvent, useEffect, useState } from 'react';
-import { closeModalAddBreed, closeModalEditBreed } from '../../redux/features/modal/modalSlice';
-import { getAllBreed, getBreedsPaged, postBreed, updateBreed } from '../../http/crudBreeds';
+import {  closeModalEditBreed } from '../../redux/features/modal/modalSlice';
+import {  getBreedsPaged,  updateBreed } from '../../http/crudBreeds';
 import Swal from 'sweetalert2';
 import { setBreeds } from '../../redux/features/breeds/breedsSlice';
 export const EditBreedModal = () => {
