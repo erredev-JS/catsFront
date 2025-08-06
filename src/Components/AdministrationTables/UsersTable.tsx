@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { IUser } from "../../types/IUser";
 import { deleteUserById, getUsersPaged } from "../../http/crudUsers";
 import { openModalRegister } from "../../redux/features/modal/modalSlice";
 import { useDispatch, useSelector } from "react-redux";

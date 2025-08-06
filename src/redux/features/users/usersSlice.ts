@@ -1,6 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { IUser } from "../../../types/IUser";
-import { setActiveBreed } from "../breeds/breedsSlice";
 
 interface UsersState {
   usersArray: IUser[];

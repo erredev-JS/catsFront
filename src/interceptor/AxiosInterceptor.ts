@@ -1,9 +1,8 @@
 import axios from "axios";
 
-import { AppDispatch, store } from "../redux/store";
+import {  store } from "../redux/store";
 import Swal from "sweetalert2";
 import { setNotLoggedIn } from "../redux/features/auth/authSlice";
-import { useDispatch } from "react-redux";
 
 
 export const AxiosInterceptor = axios.create();

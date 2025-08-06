@@ -18,6 +18,7 @@ export const MyCats = () => {
       const response = await getOwnCatsPaged(4, selectedPage);
       
       setOwnCats(response.result);
+      setPages(response.pages)
     }
   };
 
