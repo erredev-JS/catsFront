@@ -47,7 +47,7 @@ export const EditBreedModal = () => {
   return (
     <div className="bg-black/90 fixed inset-0   z-10">
 
-    <div className="border h-[50vh] w-8/10 fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-2xl bg-slate-700 max-w-[530px] z-50">
+    <div className="border h-fit pb-10  w-8/10 fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-2xl bg-slate-700 max-w-[530px] z-50">
       <div className="flex w-full justify-between px-5 pt-5 items-center">
         <p className="opacity-0"></p>
         <button className="bg-red-600 w-[33px] h-[33px] rounded text-2xl text-black font-black cursor-pointer hover:bg-red-700" onClick={handleCloseModal}>

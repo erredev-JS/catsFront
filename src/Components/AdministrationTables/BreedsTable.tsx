@@ -32,33 +32,52 @@ const handleOpenEditModal = (breed: IBreed) => {
   dispatch(setActiveBreed(breed))
   dispatch(openModalEditBreed())
 }
- 
-const handleDelete = async (breedId: number) => {
-    Swal.fire({
-  title: "Estas seguro?",
-  text: "No podrás revertir esta acción",
-  icon: "warning",
-  showCancelButton: true,
-  confirmButtonColor: "#3085d6",
-  cancelButtonColor: "#d33",
-  confirmButtonText: "Eliminar"
-}).then((result) => {
-  if (result.isConfirmed) {
-    deleteBreedById(breedId)
-    getAllBreeds()
-    Swal.fire({
-           toast: true,
-           position: "bottom-end",
-           showConfirmButton: false,
-           timer: 3000,
-           timerProgressBar: true,
-           icon: "success",
-           title: "Raza eliminada",
-           text: "Raza eliminada exitosamente",
-         });
+ const handleDelete = async (breedId: number) => {
+  const confirm = await Swal.fire({
+    title: "¿Estás seguro?",
+    text: "No podrás revertir esta acción",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Eliminar",
+    cancelButtonText: "Cancelar",
+  });
+
+  if (confirm.isConfirmed) {
+    try {
+      await deleteBreedById(breedId);
+      
+       await getAllBreeds();
+
+      Swal.fire({
+        toast: true,
+        position: "bottom-end",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        icon: "success",
+        title: "Raza eliminada",
+        text: "Raza eliminada exitosamente",
+      });
+    } catch (error: any) {
+      const message = error?.response?.data?.message || "Ocurrió un error al eliminar la raza";
+
+      Swal.fire({
+        toast: true,
+        position: "bottom-end",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        icon: "error",
+        title: "Error",
+        text: message,
+      });
+    }
   }
-});
-   }
+};
+
+   
   for (let i = 1; i <= pages; i++) {
     {
       pageButtons.push(

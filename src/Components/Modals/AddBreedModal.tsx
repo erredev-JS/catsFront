@@ -42,7 +42,7 @@ export const AddBreedModal = () => {
   return (
     <div className="bg-black/90 fixed inset-0   z-10">
 
-    <div className="border h-[50vh] w-8/10 fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-2xl bg-slate-700 max-w-[530px] z-50">
+    <div className="border h-fit pb-10  w-8/10 fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-2xl bg-slate-700 max-w-[530px] z-50">
       <div className="flex w-full justify-between px-5 pt-5 items-center">
         <p className="opacity-0"></p>
         <button className="bg-red-600 w-[33px] h-[33px] rounded text-2xl text-black font-black cursor-pointer hover:bg-red-700" onClick={handleCloseModal}>
@@ -52,7 +52,7 @@ export const AddBreedModal = () => {
 
       <form action="" className="flex flex-col w-1/2 m-auto gap-6" onSubmit={handleSubmit}>
         <h1 className="text-center text-2xl font-bold text-white">Añadir raza</h1>
-        <input type="string" className="bg-white border rounded px-4" placeholder="Ingresa el nombre del gato" onChange={(e) => setBreedName(e.target.value)} />
+        <input type="string" className="bg-white border rounded px-4" placeholder="Ingresa el nombre de la raza" onChange={(e) => setBreedName(e.target.value)} />
         
 
         <button className="bg-white w-8/10 m-auto rounded font-bold cursor-pointer hover:bg-slate-400" type="submit">

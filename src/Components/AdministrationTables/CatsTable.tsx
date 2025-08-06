@@ -22,24 +22,52 @@ export const CatsTable = () => {
   useEffect(() => {
     getCats();
   }, [selectedPage]);
-
-  const handleDeleteCat = async (id: number) => {
-    try {
-      await deleteCat(id);
-      const updatedCats = await getAllCats();
-      dispatch(setCats(updatedCats));
-      Swal.fire({
-        toast: true,
-        position: "bottom-end",
-        showConfirmButton: false,
-        timer: 3000,
-        timerProgressBar: true,
-        icon: "success",
-        title: "Gatito eliminado",
-        text: "Gatito eliminado exitosamente",
-      });
-    } catch (error) {}
+ 
+  const handleDeleteCat = async (catId: number) => {
+    const confirm = await Swal.fire({
+      title: "¿Estás seguro?",
+      text: "No podrás revertir esta acción",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Eliminar",
+      cancelButtonText: "Cancelar",
+    });
+  
+    if (confirm.isConfirmed) {
+      try {
+        await deleteCat(catId);
+        
+         await getCats();
+  
+        Swal.fire({
+          toast: true,
+          position: "bottom-end",
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+          icon: "success",
+          title: "Gato eliminado",
+          text: "Gato eliminada exitosamente",
+        });
+      } catch (error: any) {
+        const message = error?.response?.data?.message || "Ocurrió un error al eliminar el gato";
+  
+        Swal.fire({
+          toast: true,
+          position: "bottom-end",
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+          icon: "error",
+          title: "Error",
+          text: message,
+        });
+      }
+    }
   };
+  
   const handleOpenModalEditCat = async (cat: ICat) => {
     dispatch(setActiveCat(cat));
     dispatch(openModalEditCat());

@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../../redux/store";
-import { openModalLogin } from "../../../redux/features/modal/modalSlice";
+import { openModalLogin, openModalRegister } from "../../../redux/features/modal/modalSlice";
 import { setNotLoggedIn } from "../../../redux/features/auth/authSlice";
 import { useNavigate } from "react-router";
 
@@ -22,11 +22,18 @@ inventory_2
         {isLoggedIn ? (
           <span className="material-symbols-outlined cursor-pointer scale-125 text-white" onClick={() => navigate("/profile")}>account_circle</span>
         ) : (
-          <button className="bg-white hover:bg-white/70 px-2 py-1 rounded cursor-pointer absolute right-4" onClick={() => {
+          <div className="absolute  right-4 w-3/10 flex justify-around">
+          <button className="bg-white hover:bg-white/70 px-2 py-1 rounded cursor-pointer" onClick={() => {
+            dispatch(openModalRegister())
+          }}>
+          Register
+        </button>
+          <button className="bg-white hover:bg-white/70 px-2 py-1 rounded cursor-pointer" onClick={() => {
             dispatch(openModalLogin())
           }}>
           Login
         </button>
+            </div>
       )}
       {isLoggedIn ? (
         <>
