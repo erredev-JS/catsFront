@@ -72,7 +72,6 @@ export const MainScreen = () => {
       {
         catsArray.length > 0 ? <ListCats catsArray={catsArray}/> : <h1 className="text-center mt-20 text-2xl font-extrabold text-gray-400">Aun no hay gatos añadidos.</h1>
       }
-      <ListCats catsArray={catsArray} />
       <div className="flex  gap-6 m-auto w-1/3 justify-center  z-10">{pageButtons}</div>
       <Footer />
     </div>
