@@ -6,7 +6,7 @@ import { store } from "./redux/store.ts";
 import { BrowserRouter } from "react-router";
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <BrowserRouter>
+    <BrowserRouter basename="/catsFront">
 
     <Provider store={store}>
       <App />
